@@ -4,6 +4,7 @@
 	"scripts": {
 		"postinstall": "cd cashu-ts && pnpm install && pnpm compile",
 		"dev": "vite dev --host 0.0.0.0",
+		"dev:mobile": "vite dev --host 0.0.0.0",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -11,6 +12,7 @@
 		"lint": "prettier --check .",
 		"format": "prettier --write ."
 	},
+
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",
 		"@neoconfetti/svelte": "^2.0.0",

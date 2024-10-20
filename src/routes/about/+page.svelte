@@ -1,16 +1,49 @@
 <script lang="ts">
-	const ndef = new NDEFReader();
-	ndef.scan().then(() => {
-		console.log("Scan started successfully.");
-		ndef.onreadingerror = () => {
-			console.log("Cannot read data from the NFC tag. Try another one?");
-		};
-		ndef.onreading = event => {
-			console.log("NDEF message read.");
-		};
-	}).catch(error => {
-		console.log(`Error! Scan failed to start: ${error}.`);
-	});
+	import { browser } from '$app/environment';
+
+	let ndefReader: NDEFReader;
+	var decoder = new TextDecoder(); // always utf-8
+
+	if (browser) {
+		if(!('NDEFReader' in window)){
+			console.log('NFC scanning not supported in this browser');
+		}
+
+		ndefReader = new NDEFReader();
+	} else{
+		console.log('not browser');
+	}
+
+	function scanCard(): string[] {
+		let records: string[] = [];
+
+		console.log('ScanCard');
+		const reading = new AbortController();
+		ndefReader.scan({signal: reading.signal}).then(() => {
+			console.log("Scan started successfully.");
+			ndefReader.onreadingerror = () => {
+				console.log("Cannot read data from the NFC tag. Try another one?");
+			};
+			ndefReader.onreading = event => {
+				event.message.records.forEach(record => {
+					const text = decoder.decode(record.data);
+					records.push(text);
+					console.log(record);
+				})
+				// reading.abort();
+			};
+		}).catch(error => {
+			console.log(`Error! Scan failed to start: ${error}.`);
+		});
+
+		return records;
+	}
+
+
+
+	let lastScan: string[] = []
+
+
 </script>
 
 <svelte:head>
@@ -22,15 +55,13 @@
 	<h1>Scan NFC</h1>
 
 	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
+		Please bring the receipt close to your phone to scan it!
 	</p>
 
-	<pre>npm create svelte@latest</pre>
 
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
+	<button on:click={scanCard} >Scan Receipt</button>
+
+	{#each lastScan as record}
+		<p>{record}</p>
+	{/each}
 </div>
