@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import {debounce} from "./debounce";
 
 export function scan(cancel?: AbortSignal) {
 	if (browser) {
@@ -31,13 +32,15 @@ export function scan(cancel?: AbortSignal) {
 			};
 
 			reader.onreading = (event) => {
+				console.log('scanned');
 				if (!resolved) {
+					resolved = true;
 					const records: string[] = [];
 					for (const record of event.message.records) {
 						const text = decoder.decode(record.data);
 						records.push(text);
 					}
-					console.log('Scanned', records);
+					console.log(records);
 
 					res(records);
 				}
