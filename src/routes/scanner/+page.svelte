@@ -1,21 +1,27 @@
 <script lang="ts">
 	import { scan } from '../../helpers/scanner';
+	import { decodeRecords } from '../../irs';
+	import type { Receipt } from '../../irs/types';
 
-	function scanCard(): string[] {
-		let records: string[] = [];
+	let lastScan: string[] = [];
+	let receipt: Receipt | null = null;
 
+	function scanCard() {
 		scan()
 			.then((records) => {
 				console.log(records);
+				lastScan = records;
+
+				try {
+					receipt = decodeRecords(...records);
+				} catch (error) {
+					if (error instanceof Error) alert(error.message);
+				}
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-
-		return records;
 	}
-
-	let lastScan: string[] = [];
 </script>
 
 <svelte:head>
@@ -33,4 +39,8 @@
 	{#each lastScan as record}
 		<p>{record}</p>
 	{/each}
+
+	{#if receipt}
+		<pre style="white-space: pre;">{JSON.stringify(receipt)}</pre>
+	{/if}
 </div>

@@ -26,6 +26,8 @@
 	</h2>
 
 	<Counter />
+
+	<a href="/scanner">Scan</a>
 </section>
 
 <style>

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import {debounce} from "./debounce";
+import { debounce } from './debounce';
 
 export function scan(cancel?: AbortSignal) {
 	if (browser) {
@@ -11,12 +11,12 @@ export function scan(cancel?: AbortSignal) {
 	const reading = new AbortController();
 	const reader = new NDEFReader();
 
-	return new Promise<string[]>((res, rej) => {
-		const close = debounce(() => {
-			console.log('Stopping scan');
-			reading.abort();
-		}, 1000);
+	const close = debounce(() => {
+		console.log('Stopping scan');
+		reading.abort();
+	}, 10000);
 
+	return new Promise<string[]>((res, rej) => {
 		cancel?.addEventListener('abort', () => {
 			console.log('Scanning canceled');
 			reading.abort();
@@ -32,7 +32,7 @@ export function scan(cancel?: AbortSignal) {
 			};
 
 			reader.onreading = (event) => {
-				console.log('scanned');
+				console.log('Scanned');
 				if (!resolved) {
 					resolved = true;
 					const records: string[] = [];
@@ -40,7 +40,6 @@ export function scan(cancel?: AbortSignal) {
 						const text = decoder.decode(record.data);
 						records.push(text);
 					}
-					console.log(records);
 
 					res(records);
 				}
