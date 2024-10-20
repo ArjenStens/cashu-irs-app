@@ -1,0 +1,11 @@
+{
+	"relays": ["wss://relay.damus.io", "wss://nostrue.com"],
+	"servers": ["https://nostr.download", "https://cdn.hzrd149.com"],
+	"profile": {
+		"name": "International Receipt Settlement",
+		"about": "A shared sorrow costs half the sats"
+	},
+	"publishProfile": true,
+	"publishServerList": true,
+	"publishRelayList": true
+}
