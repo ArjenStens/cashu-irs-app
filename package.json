@@ -2,6 +2,7 @@
 	"name": "cashu-irs-app",
 	"version": "0.0.1",
 	"scripts": {
+		"postinstall": "cd cashu-ts && pnpm install && pnpm compile",
 		"dev": "vite dev --host 0.0.0.0",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -29,7 +30,8 @@
 	"type": "module",
 	"packageManager": "pnpm@9.12.2",
 	"dependencies": {
-		"@cashu/cashu-ts": "^1.1.0",
+		"@cashu/cashu-ts": "./cashu-ts",
+		"@scure/base": "^1.1.9",
 		"@types/w3c-web-nfc": "^1.0.4"
 	}
 }
