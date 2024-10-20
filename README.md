@@ -1,2 +1,2 @@
 # cashu-irs-app
-International Receipt Standard 
+International Receipt Settlement 
