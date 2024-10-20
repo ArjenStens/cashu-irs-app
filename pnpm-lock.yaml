@@ -11,6 +11,9 @@ importers:
       '@cashu/cashu-ts':
         specifier: ^1.1.0
         version: 1.1.0
+      '@types/w3c-web-nfc':
+        specifier: ^1.0.4
+        version: 1.0.4
     devDependencies:
       '@fontsource/fira-mono':
         specifier: ^5.0.0
@@ -387,6 +390,9 @@ packages:
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  '@types/w3c-web-nfc@1.0.4':
+    resolution: {integrity: sha512-AxTfPROOzdBhpBhrmwNn19gk36nK9SwRppSVe2C2y0TFuz/nzJ1m9oYC5DNoMeajEhHL44M+zxcH8GTkhgYteQ==}
 
   acorn@8.13.0:
     resolution: {integrity: sha512-8zSiw54Oxrdym50NlZ9sUusyO1Z1ZchgRLWRaK6c86XJFClyCgFKetdowBg5bKxyp/u+CDBJG4Mpp0m3HLZl9w==}
@@ -1272,6 +1278,8 @@ snapshots:
   '@types/cookie@0.6.0': {}
 
   '@types/estree@1.0.6': {}
+
+  '@types/w3c-web-nfc@1.0.4': {}
 
   acorn@8.13.0: {}
 

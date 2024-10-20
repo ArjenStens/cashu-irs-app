@@ -2,7 +2,7 @@
 	"name": "cashu-irs-app",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host 0.0.0.0",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -29,6 +29,7 @@
 	"type": "module",
 	"packageManager": "pnpm@9.12.2",
 	"dependencies": {
-		"@cashu/cashu-ts": "^1.1.0"
+		"@cashu/cashu-ts": "^1.1.0",
+		"@types/w3c-web-nfc": "^1.0.4"
 	}
 }
