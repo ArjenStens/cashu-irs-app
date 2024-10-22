@@ -1,12 +1,22 @@
 import type { Proof, PaymentRequest } from '@cashu/cashu-ts';
 
+export type RawReceipt = {
+	/** Supported TAX codes */
+	stc: number[];
+
+	l: RawLineItem[];
+
+	p: RawPayment[];
+};
 export type RawLineItem = {
 	/** Item name */
 	n: string;
-	/** Item image (optional) */
-	i?: string;
 	/** Price of the item */
 	p: number;
+	/** Quantity of items */
+	q: number;
+	/** Additional data */
+	// 	??
 };
 
 export type RawPayment = {
@@ -26,8 +36,6 @@ export type LineItem = {
 	name: string;
 	/** Price of the item */
 	price: number;
-	/** Optional image */
-	image?: string;
 	/** The applied payments */
 	payments: Payment[];
 	/** The amount paid so far */
@@ -47,6 +55,8 @@ export type Payment = {
 
 /** Parsed from the NFC card */
 export type Receipt = {
+	/** Supported TAX codes */
+	supportedTaxCodes: number[];
 	/** The cashu payment request for the receipt */
 	paymentRequest: PaymentRequest;
 	/** Bech32 encoded line items */
